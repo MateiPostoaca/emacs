@@ -166,7 +166,7 @@
   :hook (org-mode . efs/org-mode-visual-fill))
 
 (setq org-directory "/mnt/d/Documents/Personal/Notes")
-(setq org-agenda-files '("/mnt/d/Documents/Personal/Notes"))
+(setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
 
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
