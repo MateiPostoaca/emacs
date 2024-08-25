@@ -3,6 +3,10 @@
 (setq initial-scratch-message "")
 (setq visible-bell t)
 
+(use-package no-littering)
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
 (set-fringe-mode 10)
 
 (scroll-bar-mode -1)
@@ -27,10 +31,6 @@
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; Setup Romanian keyboard
-(setq default-input-method "romanian-prefix")
-(set-input-method "romanian-prefix")
 
 ;; Initialize package sources
 (require 'package)
@@ -172,7 +172,21 @@
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
 
-(use-package no-littering)
-(setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
+(setq make-backup-files nil)
 
+;; Setup Romanian keyboard
+(setq default-input-method "romanian-prefix")
+(set-input-method "romanian-prefix")
+(defvar use-default-input-method t)
+(make-variable-buffer-local 'use-default-input-method)
+(defun activate-default-input-method ()
+  (interactive)
+  (if use-default-input-method
+      (activate-input-method default-input-method)
+    (inactivate-input-method)))
+(add-hook 'after-change-major-mode-hook 'activate-default-input-method)
+(add-hook 'minibuffer-setup-hook 'activate-default-input-method)
+(defun inactivate-default-input-method ()
+  (setq use-default-input-method nil))
+(add-hook 'c-mode-hook 'inactivate-default-input-method)
