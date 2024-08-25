@@ -172,3 +172,7 @@
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
 
+(use-package no-littering)
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
