@@ -111,6 +111,19 @@
   (variable-pitch-mode 1)
   (visual-line-mode 1))
 
+(use-package org
+  :hook (org-mode . efs/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾")
+  (setq org-hide-emphasis-markers t)
+  (efs/org-font-setup))
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
@@ -137,17 +150,12 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
-(use-package org
-  :hook (org-mode . efs/org-mode-setup)
-  :config
-  (setq org-ellipsis " ▾")
-  (efs/org-font-setup))
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10")
+(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font-10")
+(set-face-attribute 'variable-pitch nil :font "JetBrainsMono Nerd Font-10")
 
-(use-package org-bullets
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+(dolist (face '(default fixed-pitch))
+  (set-face-attribute `,face nil :font "JetBrainsMono Nerd Font-10"))
 
 (defun efs/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
@@ -156,3 +164,11 @@
 
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
+
+(setq org-directory "/mnt/d/Documents/Personal/Notes")
+(setq org-agenda-files '("/mnt/d/Documents/Personal/Notes"))
+
+(setq org-agenda-start-with-log-mode t)
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+
