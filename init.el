@@ -171,6 +171,10 @@
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
+(global-set-key "\C-ca" 'org-agenda)
+(setq org-agenda-custom-commands
+  '(("d" "Daily Agenda"
+     ((agenda "" ((org-agenda-span 'day)))))))
 
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
 (setq make-backup-files nil)
