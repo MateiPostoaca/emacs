@@ -1,4 +1,6 @@
 auto-save-list/
 eln-cache/
 elpa/
+etc/
 transient/
+var/
