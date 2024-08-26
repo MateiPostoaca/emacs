@@ -198,3 +198,5 @@
      (file . find-file)
      (wl . wl-other-frame)))
 (global-set-key (kbd "C-<tab>") 'mode-line-other-buffer)
+(setq split-width-threshold 80)
+(setq split-height-threshold nil)
