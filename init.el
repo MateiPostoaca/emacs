@@ -174,6 +174,10 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "M-n") #'org-next-link)
+  (define-key org-mode-map (kbd "M-p") #'org-previous-link))
+(add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree)
 
 (setq org-agenda-custom-commands
   '(("d" "Daily Agenda"
@@ -207,3 +211,5 @@
 (global-set-key (kbd "C-<tab>") 'mode-line-other-buffer)
 (setq split-width-threshold 80)
 (setq split-height-threshold nil)
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width nil)
