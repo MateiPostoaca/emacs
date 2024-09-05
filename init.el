@@ -179,6 +179,27 @@
   (define-key org-mode-map (kbd "M-p") #'org-previous-link))
 (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree)
 
+(defun my/org-journal-file-name ()
+  (let ((dir (expand-file-name (format-time-string "%Y/%m/" (current-time))
+                               (concat org-directory "/Struct/Journal/"))))
+    (unless (file-directory-p dir)
+      (make-directory dir t))
+    (expand-file-name (format-time-string "%Y-%m-%d.org" (current-time)) dir)))
+
+(defun my/org-journal-template ()
+  (format "_Journal Entry - %s_\n\n"
+          (format-time-string "%Y/%m/%d %A")))
+
+(defun my/open-daily-journal ()
+  (interactive)
+  (let ((journal-file (my/org-journal-file-name)))
+    (find-file journal-file)
+    (when (not (file-exists-p journal-file))
+      (insert (my/org-journal-template))
+      (save-buffer))))
+
+(global-set-key (kbd "C-c f j") 'my/open-daily-journal)
+
 (setq org-agenda-custom-commands
   '(("d" "Daily Agenda"
      ((agenda "" ((org-agenda-span 'day)))))))
