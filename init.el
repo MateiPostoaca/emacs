@@ -50,6 +50,9 @@
 
 (use-package command-log-mode)
 
+;; Enable redo in evil mode
+(setq evil-undo-system 'undo-redo)
+
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -157,6 +160,7 @@
 (dolist (face '(default fixed-pitch))
   (set-face-attribute `,face nil :font "JetBrainsMono Nerd Font-10"))
 
+;; Org-mode setup
 (defun efs/org-mode-visual-fill ()
   (setq visual-fill-column-width 80
         visual-fill-column-center-text t)
@@ -239,8 +243,14 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame)))
+
+;; Quick buffer switching
 (global-set-key (kbd "C-<tab>") 'mode-line-other-buffer)
+
+;; Emacs buffer splitting behaviour
 (setq split-width-threshold 80)
 (setq split-height-threshold nil)
+
+;; Enable image previews in Org-mode
 (setq org-startup-with-inline-images t)
 (setq org-image-actual-width nil)
