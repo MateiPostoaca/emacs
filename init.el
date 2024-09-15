@@ -209,7 +209,7 @@
      ((agenda "" ((org-agenda-span 'day)))))
     ("z" "8-Day Agenda"
      ((agenda "" ((org-agenda-span 8)))))
-    ("x" "Montly Agenda"
+    ("x" "Monthly Agenda"
      ((agenda "" ((org-agenda-span 31)))))))
 
 (defun my/journal-file-path ()
