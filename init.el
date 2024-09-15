@@ -3,9 +3,9 @@
 (setq initial-scratch-message "")
 (setq visible-bell t)
 
-(use-package no-littering)
 (setq auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+      `((".*" ,"~/.emacs.d/auto-save/" t)))
+(make-directory "~/.emacs.d/auto-save/" t)
 
 (set-fringe-mode 10)
 
