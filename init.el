@@ -248,12 +248,20 @@
      (file . find-file)
      (wl . wl-other-frame)))
 
+;; Enable LaTeX previews
+(setq org-startup-with-latex-preview t)
+(add-hook 'org-mode-hook 'org-latex-preview)
+
 ;; Quick buffer switching
 (global-set-key (kbd "C-<tab>") 'mode-line-other-buffer)
 
 ;; Emacs buffer splitting behaviour
 (setq split-width-threshold 80)
 (setq split-height-threshold nil)
+
+;; Disable auto-indentation in Org-mode source blocks
+(setq org-src-preserve-indentation t)
+(setq org-edit-src-content-indentation 0)
 
 ;; Enable image previews in Org-mode
 (setq org-startup-with-inline-images t)
