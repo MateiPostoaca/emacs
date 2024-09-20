@@ -9,6 +9,7 @@
 
 (set-fringe-mode 10)
 
+(menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -265,4 +266,15 @@
 
 ;; Enable image previews in Org-mode
 (setq org-startup-with-inline-images t)
+(add-hook 'org-mode-hook 'org-display-inline-images)
 (setq org-image-actual-width nil)
+
+;; Inline animated gifs in Org-mode
+(use-package org-inline-anim
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook 'org-inline-anim-mode)
+  (setq org-inline-anim-loop t)
+  (define-key org-mode-map (kbd "C-c .") 'org-inline-anim-animate-all))
+(add-hook 'org-mode-hook #'org-inline-anim-mode)
+(add-hook 'org-mode-hook 'org-inline-anim-animate-all)
