@@ -214,13 +214,13 @@
      ((agenda "" ((org-agenda-span 31)))))))
 
 (defun my/journal-file-path ()
-  (format-time-string "/mnt/d/Documents/Personal/Notes/Struct/Journal/%Y/%m/%Y-%m-%d.org"))
+  (format-time-string "./Journal/%Y/%m/%Y-%m-%d.org"))
 
 (setq org-capture-templates
   '(("j" "Journal Index"
     plain
     (file "/mnt/d/Documents/Personal/Notes/Struct/Journal.org")
-    "[[file:%(my/journal-file-path)][%<%Y-%m-%d>]]\n"
+    "[[%(my/journal-file-path)][%<%Y-%m-%d>]]\n"
     :immediate-finish t)))
 
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
