@@ -4,8 +4,8 @@
 (setq visible-bell t)
 
 (setq auto-save-file-name-transforms
-      `((".*" ,"~/.emacs.d/auto-save/" t)))
-(make-directory "~/.emacs.d/auto-save/" t)
+      `((".*" ,"~/AppData/Roaming/.emacs.d/auto-save/" t)))
+(make-directory "~/AppData/Roaming/.emacs.d/auto-save/" t)
 
 (set-fringe-mode 10)
 
@@ -20,6 +20,11 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; Set the default coding system to UTF-8
+(prefer-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
@@ -27,7 +32,7 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set monospace font
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-10"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono NF Semibold-10"))
 (add-to-list 'default-frame-alist '(line-spacing . 0))
 
 ;; Make ESC quit prompts
@@ -143,7 +148,7 @@
                   (org-level-6 . 1.0)
                   (org-level-7 . 1.0)
                   (org-level-8 . 1.0)))
-    (set-face-attribute (car face) nil :font "JetBrainsMono Nerd Font-10" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font "JetBrainsMono NF SemiBold-10" :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -154,12 +159,12 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-10")
-(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font-10")
-(set-face-attribute 'variable-pitch nil :font "JetBrainsMono Nerd Font-10")
+(set-face-attribute 'default nil :font "JetBrainsMono NF Semibold-10")
+(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono NF Semibold-10")
+(set-face-attribute 'variable-pitch nil :font "JetBrainsMono NF Semibold-10")
 
 (dolist (face '(default fixed-pitch))
-  (set-face-attribute `,face nil :font "JetBrainsMono Nerd Font-10"))
+  (set-face-attribute `,face nil :font "JetBrainsMono NF Semibold-10"))
 
 ;; Org-mode setup
 (defun efs/org-mode-visual-fill ()
@@ -170,7 +175,8 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
-(setq org-directory "/mnt/d/Documents/Personal/Notes")
+(setq temporary-file-directory "D:/Documents/Personal/Notes/Temp")
+(setq org-directory "D:/Documents/Personal/Notes")
 (setq org-agenda-files (directory-files-recursively (concat org-directory "/Struct/Plans") "\\.org$"))
 
 (setq org-agenda-start-with-log-mode t)
@@ -219,11 +225,11 @@
 (setq org-capture-templates
   '(("j" "Journal Index"
     plain
-    (file "/mnt/d/Documents/Personal/Notes/Struct/Journal.org")
+    (file "D:/Documents/Personal/Notes/Struct/Journal.org")
     "[[%(my/journal-file-path)][%<%Y-%m-%d>]]\n"
     :immediate-finish t)))
 
-(setq user-emacs-directory (expand-file-name "~/.cache/emacs"))
+(setq user-emacs-directory (expand-file-name "~/AppData/Roaming/.emacs.d/emacs-cache"))
 (setq make-backup-files nil)
 
 ;; Setup Romanian keyboard
